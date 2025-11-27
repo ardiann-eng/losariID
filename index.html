@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Losari Digital - Solusi Statistik Akademik</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="pavicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a8a',
+                        secondary: '#3b82f6',
+                        dark: '#0f172a',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans">
+    <!-- Navbar Component -->
+    <custom-navbar></custom-navbar>
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-b from-primary to-secondary text-white py-20 px-4 relative overflow-hidden">
+        <div class="absolute bottom-0 left-0 right-0 h-16 bg-white rounded-t-[50%] transform scale-x-150"></div>
+<div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Olah Data Statistik & Interpretasi Otomatis. Selesai dalam Sekejap.</h1>
+            <p class="text-xl mb-10 max-w-3xl mx-auto">Software berbasis R yang mengubah data angka menjadi narasi skripsi siap pakai. Solusi cerdas untuk Mahasiswa dan Peneliti.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="https://apps.losari.or.id/v1/" class="bg-white text-primary font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition">Coba Software Sekarang</a>
+                <a href="#" class="border-2 border-white py-3 px-8 rounded-full hover:bg-white hover:text-primary transition">Lihat Paket Konsultasi</a>
+            </div>
+            <div class="flex flex-wrap justify-center items-center gap-6 mt-16">
+                <div class="flex items-center gap-2">
+                    <i data-feather="book" class="w-5 h-5"></i>
+                    <span>Metode Valid & Akademis</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i data-feather="bar-chart-2" class="w-5 h-5"></i>
+                    <span>Dikembangkan Dosen</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i data-feather="check-circle" class="w-5 h-5"></i>
+                    <span>Teruji Statistik</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="booking-modal" class="fixed inset-0 hidden z-50 items-center justify-center">
+        <div id="booking-backdrop" class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+        <div class="relative w-full max-w-xl rounded-2xl shadow-2xl overflow-hidden">
+            <div class="bg-primary px-6 py-4 flex items-center justify-between">
+                <h3 class="text-white font-bold">Booking Konfirmasi</h3>
+                <button id="booking-close" class="text-white/80 hover:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="bg-white p-6">
+                <p id="selected-package-text" class="text-gray-600">Anda memilih: </p>
+                <div class="mt-4 grid md:grid-cols-2 gap-4">
+                    <div class="relative">
+                        <i data-feather="user" class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input id="booking-name" type="text" placeholder="Nama Lengkap" class="w-full pl-10 bg-gray-50 border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600" />
+                    </div>
+                    <div class="relative">
+                        <i data-feather="phone" class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input id="booking-phone" type="tel" placeholder="Nomor WhatsApp" class="w-full pl-10 bg-gray-50 border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600" />
+                    </div>
+                    <div class="relative">
+                        <i data-feather="home" class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input id="booking-campus" type="text" placeholder="Asal Kampus/Instansi" class="w-full pl-10 bg-gray-50 border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600" />
+                    </div>
+                    <div class="relative">
+                        <i data-feather="file-text" class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input id="booking-title" type="text" placeholder="Judul Skripsi/Tesis" class="w-full pl-10 bg-gray-50 border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600" />
+                    </div>
+                    <div class="relative md:col-span-2">
+                        <i data-feather="calendar" class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input id="booking-datetime" type="text" placeholder="Rencana Tanggal & Jam" class="w-full pl-10 bg-gray-50 border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600" />
+                    </div>
+                    <div class="md:col-span-2">
+                        <textarea id="booking-desc" rows="4" placeholder="Deskripsi Masalah Singkat" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"></textarea>
+                    </div>
+                </div>
+                <button id="booking-submit" class="mt-6 w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition">Lanjut ke WhatsApp</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feature Section -->
+    <section class="py-20 px-4 bg-white">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="text-secondary font-bold">SOFTWARE CANGGIH</span>
+                <h2 class="text-3xl font-bold text-dark mt-2 mb-6">Hemat Waktu Berbulan-bulan dalam Olah Data.</h2>
+                <p class="text-lg mb-6">Tidak perlu lagi pusing memikirkan makna output. Software kami melakukan pekerjaan berat untuk Anda.</p>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-3">
+                        <i data-feather="check" class="w-5 h-5 mt-1 text-secondary"></i>
+                        <span>Berbasis R (Powerful & Akurat)</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i data-feather="check" class="w-5 h-5 mt-1 text-secondary"></i>
+                        <span>Metode Lengkap (Uji Perbandingan, Korelasi, Regresi, PLS-SEM)</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i data-feather="check" class="w-5 h-5 mt-1 text-secondary"></i>
+                        <span>Output langsung file Word & Excel</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="flex justify-center">
+                <div class="bg-gray-50 p-8 rounded-xl shadow-md w-full max-w-md">
+                    <div class="flex justify-between items-center mb-8">
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <i data-feather="file-text" class="w-8 h-8 text-primary"></i>
+                        </div>
+                        <i data-feather="arrow-right" class="w-6 h-6 text-gray-400"></i>
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <i data-feather="cpu" class="w-8 h-8 text-primary"></i>
+                        </div>
+                        <i data-feather="arrow-right" class="w-6 h-6 text-gray-400"></i>
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <i data-feather="file" class="w-8 h-8 text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-sm text-gray-500">Input Data → Proses Otomatis →</p>
+                        <p class="font-bold text-primary mt-2">BAB 4 Jadi!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Cards Section -->
+    <section class="py-20 px-4 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <div class="md:flex justify-between items-end mb-12">
+                <div class="md:w-1/2 mb-6 md:mb-0">
+                    <h2 class="text-3xl font-bold text-dark mb-4">Fitur Unggulan: Interpretasi Otomatis.</h2>
+                    <p class="text-lg">Fokus pada pembahasan, biarkan software menangani penulisan teknis.</p>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="relative bg-white p-10 rounded-2xl shadow-xl shadow-blue-900/5 transition transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-900/10">
+                    <div class="absolute -top-6 -left-6 w-24 h-24 bg-gradient-to-br from-cyan-400/30 to-blue-600/30 blur-3xl rounded-full"></div>
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" class="mb-4 relative">
+                        <defs>
+                            <linearGradient id="grad-message" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#06b6d4"/>
+                                <stop offset="100%" stop-color="#1e3a8a"/>
+                            </linearGradient>
+                        </defs>
+                        <rect x="3" y="4" width="18" height="14" rx="3" stroke="url(#grad-message)" stroke-width="2"/>
+                        <path d="M7 17v4l4-4" stroke="url(#grad-message)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <line x1="7" y1="9" x2="17" y2="9" stroke="url(#grad-message)" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="7" y1="12" x2="14" y2="12" stroke="url(#grad-message)" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <h3 class="text-xl font-bold mb-3">Auto-Narasi</h3>
+                    <p class="text-gray-600">Keluar output langsung berupa kalimat penjelasan yang ilmiah.</p>
+                </div>
+                <div class="relative bg-white p-10 rounded-2xl shadow-xl shadow-blue-900/5 transition transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-900/10">
+                    <div class="absolute -top-6 -left-6 w-24 h-24 bg-gradient-to-br from-cyan-400/30 to-blue-600/30 blur-3xl rounded-full"></div>
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" class="mb-4 relative">
+                        <defs>
+                            <linearGradient id="grad-globe" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#06b6d4"/>
+                                <stop offset="100%" stop-color="#1e3a8a"/>
+                            </linearGradient>
+                        </defs>
+                        <circle cx="12" cy="12" r="9" stroke="url(#grad-globe)" stroke-width="2"/>
+                        <path d="M3 12h18M12 3c3 3 3 15 0 18M6 6c4 4 8 4 12 0M6 18c4-4 8-4 12 0" stroke="url(#grad-globe)" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <h3 class="text-xl font-bold mb-3">Dual Bahasa</h3>
+                    <p class="text-gray-600">Tersedia support Bahasa Indonesia dan Inggris.</p>
+                </div>
+                <div class="relative bg-white p-10 rounded-2xl shadow-xl shadow-blue-900/5 transition transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-900/10">
+                    <div class="absolute -top-6 -left-6 w-24 h-24 bg-gradient-to-br from-cyan-400/30 to-blue-600/30 blur-3xl rounded-full"></div>
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" class="mb-4 relative">
+                        <defs>
+                            <linearGradient id="grad-shield" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#06b6d4"/>
+                                <stop offset="100%" stop-color="#1e3a8a"/>
+                            </linearGradient>
+                        </defs>
+                        <path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-3z" stroke="url(#grad-shield)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                    <h3 class="text-xl font-bold mb-3">Validitas Terjamin</h3>
+                    <p class="text-gray-600">Dikembangkan langsung oleh Dosen.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="mentorship" class="py-20 px-4 bg-white">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-3xl font-bold text-dark mb-4">Paket Konsultasi Privat & Bimbingan (Via Zoom)</h2>
+            <p class="text-lg mb-12 max-w-2xl mx-auto">Maksimal 5 orang per sesi untuk efektivitas. Dibimbing langsung oleh pakarnya.</p>
+            
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-md transition">
+                    <div class="bg-primary bg-opacity-10 p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4 mx-auto">
+                        <i data-feather="user" class="w-5 h-5 text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Paket 1 Orang - 1 Jam</h3>
+                    <p class="text-primary text-2xl font-bold mb-4">Rp 150.000</p>
+                    <p class="text-gray-600">Sesi privat intensif.</p>
+                    <a href="#" class="mt-6 inline-block border-2 border-primary text-primary bg-white py-2 px-6 rounded-full hover:bg-primary hover:text-white transition open-booking" data-package="Paket 1 Orang - 1 Jam">Pilih Paket</a>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-md transition">
+                    <div class="bg-primary bg-opacity-10 p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4 mx-auto">
+                        <i data-feather="user" class="w-5 h-5 text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Paket 1 Orang - 2 Jam</h3>
+                    <p class="text-primary text-2xl font-bold mb-4">Rp 250.000</p>
+                    <p class="text-gray-600">Lebih hemat untuk materi mendalam.</p>
+                    <a href="#" class="mt-6 inline-block border-2 border-primary text-primary bg-white py-2 px-6 rounded-full hover:bg-primary hover:text-white transition open-booking" data-package="Paket 1 Orang - 2 Jam">Pilih Paket</a>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-md transition">
+                    <div class="bg-primary bg-opacity-10 p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4 mx-auto">
+                        <i data-feather="users" class="w-5 h-5 text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Paket 2 Orang - 1 Jam</h3>
+                    <p class="text-primary text-2xl font-bold mb-4">Rp 200.000 <span class="text-sm">(@100rb/org)</span></p>
+                    <p class="text-gray-600">Belajar bareng teman.</p>
+                    <a href="#" class="mt-6 inline-block border-2 border-primary text-primary bg-white py-2 px-6 rounded-full hover:bg-primary hover:text-white transition open-booking" data-package="Paket 2 Orang - 1 Jam">Pilih Paket</a>
+                </div>
+                <div class="relative bg-white border-2 border-amber-400 rounded-xl p-8 shadow-md hover:shadow-lg transition">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-white text-xs font-bold px-3 py-1 rounded-full shadow">Best Value</div>
+                    <div class="bg-primary bg-opacity-10 p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4 mx-auto">
+                        <i data-feather="users" class="w-5 h-5 text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Paket 2 Orang - 2 Jam</h3>
+                    <p class="text-primary text-2xl font-bold mb-4">Rp 350.000 <span class="text-sm">(@175rb/org)</span></p>
+                    <p class="text-gray-600">Paket paling populer & hemat.</p>
+                    <a href="#" class="mt-6 inline-block border-2 border-amber-400 text-amber-600 bg-white py-2 px-6 rounded-full hover:bg-amber-400 hover:text-white transition open-booking" data-package="Paket 2 Orang - 2 Jam">Pilih Paket</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="mentor" class="py-20 px-4 bg-white">
+        <div class="max-w-5xl mx-auto rounded-3xl bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-2xl shadow-blue-900/40 p-10">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="max-w-2xl">
+                    <div class="text-xs uppercase tracking-widest text-white/70">MENTORSHIP & SUPPORT</div>
+                    <h2 class="text-3xl md:text-4xl font-bold mt-2">Dibimbing Langsung oleh Rizal Bakri.</h2>
+                    <p class="text-white/80 mt-3">Pengembang Losari Digital & Dosen Bisnis Digital UNM. Gabung WAG sekarang.</p>
+                </div>
+                <div class="flex gap-3">
+                    <a href="https://wa.me/6285395621456?text=Halo%20Pak%20Rizal%2C%20saya%20ingin%20booking%20jadwal%20konsultasi%20statistik." class="rounded-full bg-green-500/80 text-white px-6 py-3 hover:bg-green-600/80 transition flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                            <path d="M12 2C6.48 2 2 6.02 2 10.98c0 1.94.62 3.75 1.68 5.28L2 22l5.9-1.54c1.46.64 3.06.99 4.7.99 5.52 0 10-4.02 10-8.98S17.52 2 12 2zm0 16.23c-1.44 0-2.86-.36-4.12-1.05l-.3-.16-3.5.92.94-3.41-.2-.32A7.11 7.11 0 0 1 4.88 11c0-3.86 3.19-6.98 7.12-6.98s7.12 3.13 7.12 6.98-3.19 6.98-7.12 6.98zm4.03-4.76c-.22-.11-1.3-.64-1.5-.71-.2-.08-.35-.11-.5.11-.15.22-.58.71-.71.86-.13.15-.26.17-.48.06-.22-.11-.93-.34-1.77-1.09-.65-.57-1.09-1.28-1.22-1.49-.13-.22-.01-.34.1-.45.1-.1.22-.26.33-.39.11-.13.15-.22.22-.37.07-.15.03-.28-.01-.39-.04-.11-.5-1.2-.68-1.64-.18-.43-.36-.37-.5-.37-.13 0-.28-.02-.43-.02-.15 0-.39.06-.6.28-.2.22-.8.78-.8 1.9 0 1.12.82 2.2.93 2.35.11.15 1.62 2.56 3.96 3.48.55.24.98.38 1.32.49.55.17 1.05.15 1.45.09.44-.07 1.3-.53 1.49-1.04.18-.5.18-.93.12-1.02-.06-.09-.2-.15-.42-.26z"/>
+                        </svg>
+                        Contact Person
+                    </a>
+                    <a href="#" class="rounded-full border-2 border-white text-white px-6 py-3 hover:bg-white hover:text-blue-700 transition">Pelajari Program</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 px-4 bg-gray-50">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-dark mb-12 text-center">Pertanyaan yang Sering Diajukan</h2>
+            <div id="faq-list" class="space-y-4">
+                <div class="faq-item bg-white p-6 rounded-xl shadow-sm border border-transparent">
+                    <button class="faq-toggle w-full flex justify-between items-center text-left">
+                        <span class="font-bold">Apakah software ini bisa digunakan untuk Disertasi (S3)?</span>
+                        <i data-feather="chevron-down" class="w-5 h-5"></i>
+                    </button>
+                    <div class="faq-content mt-4">
+                        <p class="text-gray-600">Tentu saja. Software ini berbasis R yang mendukung metode statistika kompleks seperti SEM-PLS, Regresi Data Panel, dan Uji Multivariat yang sering digunakan dalam Tesis (S2) dan Disertasi (S3).</p>
+                    </div>
+                </div>
+                <div class="faq-item bg-white p-6 rounded-xl shadow-sm border border-transparent">
+                    <button class="faq-toggle w-full flex justify-between items-center text-left">
+                        <span class="font-bold">Bagaimana cara install softwarenya? Apakah berat?</span>
+                        <i data-feather="chevron-down" class="w-5 h-5"></i>
+                    </button>
+                    <div class="faq-content mt-4">
+                        <p class="text-gray-600">Software ini sangat ringan. Anda akan mendapatkan file installer dan panduan video instalasi langkah demi langkah. Jika ada kendala, tim kami siap membantu via Remote Desktop (Zoom/AnyDesk).</p>
+                    </div>
+                </div>
+                <div class="faq-item bg-white p-6 rounded-xl shadow-sm border border-transparent">
+                    <button class="faq-toggle w-full flex justify-between items-center text-left">
+                        <span class="font-bold">Saya sama sekali buta statistik, apakah hasil interpretasinya mudah dipahami?</span>
+                        <i data-feather="chevron-down" class="w-5 h-5"></i>
+                    </button>
+                    <div class="faq-content mt-4">
+                        <p class="text-gray-600">Sangat mudah. Output dari software ini bukan hanya angka, melainkan file Microsoft Word yang berisi kalimat penjelasan (narasi) lengkap. Anda tinggal membaca dan menyesuaikannya sedikit dengan konteks penelitian Anda.</p>
+                    </div>
+                </div>
+                <div class="faq-item bg-white p-6 rounded-xl shadow-sm border border-transparent">
+                    <button class="faq-toggle w-full flex justify-between items-center text-left">
+                        <span class="font-bold">Apakah ada layanan bantuan publikasi jurnal?</span>
+                        <i data-feather="chevron-down" class="w-5 h-5"></i>
+                    </button>
+                    <div class="faq-content mt-4">
+                        <p class="text-gray-600">Ya, kami menyediakan layanan tambahan untuk review jurnal, perbaikan metodologi, hingga pendampingan submit ke jurnal nasional maupun internasional bereputasi.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Component -->
+    <custom-footer></custom-footer>
+
+    <!-- Components -->
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    
+    <script src="script.js"></script>
+    <script>
+        feather.replace();
+    </script>
+    <script>
+        (function(){
+            var modal = document.getElementById('booking-modal');
+            var backdrop = document.getElementById('booking-backdrop');
+            var closeBtn = document.getElementById('booking-close');
+            var selectedText = document.getElementById('selected-package-text');
+            var submitBtn = document.getElementById('booking-submit');
+            var selectedPackage = '';
+
+            function openModal(pkg){
+                selectedPackage = pkg || '';
+                selectedText.textContent = 'Anda memilih: ' + selectedPackage;
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                feather.replace();
+            }
+            function closeModal(){
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+
+            Array.prototype.forEach.call(document.querySelectorAll('.open-booking'), function(btn){
+                btn.addEventListener('click', function(e){
+                    e.preventDefault();
+                    openModal(btn.getAttribute('data-package'));
+                });
+            });
+
+            closeBtn.addEventListener('click', closeModal);
+            backdrop.addEventListener('click', closeModal);
+
+            submitBtn.addEventListener('click', function(){
+                var name = document.getElementById('booking-name').value.trim();
+                var phone = document.getElementById('booking-phone').value.trim();
+                var campus = document.getElementById('booking-campus').value.trim();
+                var title = document.getElementById('booking-title').value.trim();
+                var datetime = document.getElementById('booking-datetime').value.trim();
+                var desc = document.getElementById('booking-desc').value.trim();
+                var msg =
+                    'Halo Pak Rizal, saya ingin booking *' + selectedPackage + '*.' + '\n\n' +
+                    'Data Diri:\n' +
+                    '- Nama: *' + name + '*\n' +
+                    '- WA: *' + phone + '*\n' +
+                    '- Kampus: *' + campus + '*\n\n' +
+                    'Detail Riset:\n' +
+                    '- Judul: *' + title + '*\n' +
+                    '- Masalah: *' + desc + '*\n' +
+                    '- Rencana Jadwal: *' + datetime + '*';
+                var url = 'https://wa.me/6285395621456?text=' + encodeURIComponent(msg);
+                window.open(url, '_blank');
+            });
+        })();
+    </script>
+    <script>
+        (function(){
+            feather.replace();
+            var items = document.querySelectorAll('#faq-list .faq-item');
+            items.forEach(function(item){
+                var btn = item.querySelector('.faq-toggle');
+                var content = item.querySelector('.faq-content');
+                btn.addEventListener('click', function(){
+                    // close others
+                    items.forEach(function(other){
+                        if(other !== item){
+                            other.classList.remove('open');
+                            other.querySelector('.faq-toggle').classList.remove('active');
+                            var oc = other.querySelector('.faq-content');
+                            oc.style.maxHeight = null;
+                            oc.style.opacity = 0;
+                            other.classList.remove('border-blue-500');
+                            other.classList.add('border-transparent');
+                        }
+                    });
+                    var isOpen = item.classList.toggle('open');
+                    btn.classList.toggle('active', isOpen);
+                    if(isOpen){
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        content.style.opacity = 1;
+                        item.classList.add('border-blue-500');
+                        item.classList.remove('border-transparent');
+                    } else {
+                        content.style.maxHeight = null;
+                        content.style.opacity = 0;
+                        item.classList.remove('border-blue-500');
+                        item.classList.add('border-transparent');
+                    }
+                });
+            });
+        })();
+    </script>
+<script src="https://huggingface.co/deepsite/deepsite-badge.js"></script>
+</body>
+</html>
