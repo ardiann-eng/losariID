@@ -33,10 +33,11 @@ class CustomNavbar extends HTMLElement {
                     width: 24px;
                     height: 24px;
                 }
-.nav-links {
+                .nav-links {
                     display: flex;
                     gap: 2rem;
                     align-items: center;
+                    transition: max-height 0.3s ease, opacity 0.3s ease;
                 }
                 .nav-links a {
                     color: white;
@@ -79,9 +80,13 @@ class CustomNavbar extends HTMLElement {
                         flex-direction: column;
                         padding: 1rem 2rem;
                         gap: 1rem;
+                        max-height: 0;
+                        opacity: 0;
                     }
                     .nav-links.active {
                         display: flex;
+                        max-height: 500px;
+                        opacity: 1;
                     }
                     .contact-btn {
                         width: 100%;
@@ -117,6 +122,21 @@ class CustomNavbar extends HTMLElement {
             const isOpen = navLinks.classList.toggle('active');
             mobileBtn.innerHTML = isOpen ? '<i data-feather="x"></i>' : '<i data-feather="menu"></i>';
             feather.replace();
+        });
+
+        this.shadowRoot.querySelectorAll('.nav-links a[href^="#"]').forEach((link) => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = link.getAttribute('href');
+                const el = document.querySelector(target);
+                if (el) {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    try { history.pushState(null, '', target); } catch {}
+                }
+                navLinks.classList.remove('active');
+                mobileBtn.innerHTML = '<i data-feather="menu"></i>';
+                feather.replace();
+            });
         });
 
         this.shadowRoot.querySelectorAll('.nav-links a[href^="#"]').forEach((link) => {

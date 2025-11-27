@@ -64,18 +64,23 @@ class CustomFooter extends HTMLElement {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    transition: background-color 0.3s;
+                    transition: background-color 0.3s, transform 0.3s;
                 }
                 .social-links a:hover {
                     background-color: rgba(255, 255, 255, 0.2);
+                    transform: translateY(-2px);
                 }
                 @media (max-width: 768px) {
                     .footer-content {
-                        grid-template-columns: 1fr;
+                        grid-template-columns: repeat(2, 1fr);
                         text-align: center;
+                        gap: 1.5rem;
                     }
                     .footer-links {
                         align-items: center;
+                    }
+                    footer {
+                        padding: 2rem 1rem;
                     }
                 }
             </style>
@@ -88,10 +93,32 @@ class CustomFooter extends HTMLElement {
                         </div>
 <p>Solusi statistik akademik untuk mahasiswa dan peneliti.</p>
                         <div class="social-links mt-4">
-                            <a href="#"><i data-feather="instagram"></i></a>
-                            <a href="#"><i data-feather="facebook"></i></a>
-                            <a href="#"><i data-feather="linkedin"></i></a>
-                            <a href="#"><i data-feather="youtube"></i></a>
+                            <a href="https://instagram.com" aria-label="Instagram">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                </svg>
+                            </a>
+                            <a href="https://linkedin.com" aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2h-2v9H10V9h4"></path>
+                                    <rect x="2" y="9" width="4" height="12"></rect>
+                                    <circle cx="4" cy="4" r="2"></circle>
+                                </svg>
+                            </a>
+                            <a href="https://youtube.com" aria-label="YouTube">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-2C18.88 4 12 4 12 4s-6.88 0-8.59.42a2.78 2.78 0 0 0-1.95 2A29.94 29.94 0 0 0 1 12a29.94 29.94 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 2c1.71.42 8.59.42 8.59.42s6.88 0 8.59-.42a2.78 2.78 0 0 0 1.95-2A29.94 29.94 0 0 0 23 12a29.94 29.94 0 0 0-.46-5.58z"></path>
+                                    <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon>
+                                </svg>
+                            </a>
+                            <a href="https://wa.me/6285395621456" aria-label="WhatsApp">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M16.54 7.46a7.5 7.5 0 1 0-12.53 8.16L3 21l5.54-1a7.5 7.5 0 0 0 8-12.54z"></path>
+                                    <path d="M7 10.2c.5 1 1.6 2.2 2.8 2.8l.7-.7c.2-.2.6-.3.8-.1l1.7.8c.2.1.4.4.3.7l-.4 1.4c-.1.3-.4.5-.7.6-.9.2-2.4-.1-3.8-1.5-1.3-1.3-1.7-2.8-1.5-3.8.1-.3.3-.6.6-.7l1.4-.4c.3-.1.6.1.7.3l.3.7z"></path>
+                                </svg>
+                            </a>
                         </div>
                     </div>
                     <div>
